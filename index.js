@@ -1,6 +1,4 @@
-function add(x, y) {
-  return x + y;
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
 }
-
-const result = add(5, 3);
-console.log(result); // 8
