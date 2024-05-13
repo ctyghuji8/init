@@ -1,18 +1,24 @@
-function minPathSum(grid) {
-  const m = grid.length;
-  const n = grid[0].length;
-  const dp = new Array(m).fill(0).map(() => new Array(n).fill(0));
-  dp[0][0] = grid[0][0];
-  for (let i = 1; i < m; i++) {
-    dp[i][0] = dp[i - 1][0] + grid[i][0];
+const mergeSort = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
   }
-  for (let j = 1; j < n; j++) {
-    dp[0][j] = dp[0][j - 1] + grid[0][j];
-  }
-  for (let i = 1; i < m; i++) {
-    for (let j = 1; j < n; j++) {
-      dp[i][j] = grid[i][j] + Math.min(dp[i - 1][j], dp[i][j - 1]);
+  const mid = Math.floor(arr.length / 2);
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
+  return merge(left, right);
+};
+const merge = (left, right) => {
+  let result = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      result.push(left[leftIndex]);
+      leftIndex++;
+    } else {
+      result.push(right[rightIndex]);
+      rightIndex++;
     }
   }
-  return dp[m - 1][n - 1];
-}
+  return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+};
