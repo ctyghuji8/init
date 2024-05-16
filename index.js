@@ -1,1 +1,10 @@
-const zip = (arr1, arr2) => arr1.map((el, i) => [el, arr2[i]]);
+function rob(nums) {
+  let prevMax = 0;
+  let currMax = 0;
+  for (const num of nums) {
+    const temp = currMax;
+    currMax = Math.max(prevMax + num, currMax);
+    prevMax = temp;
+  }
+  return currMax;
+}
